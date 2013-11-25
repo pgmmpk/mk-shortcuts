@@ -1,15 +1,17 @@
 # mkShortcuts
 
-AngularJS module that provides mkShortcutFactory service and mkShortcutManager directive. Use it for getting programmatic control over
+AngularJS module that provides mkShortcutFactory service. Use it for getting programmatic control over
 keyboard shortcuts. This is useful for dynamic shortcuts. If your shortcuts never change, you should instead
-use AngularJS built-in [ngKeydown/ngKeyup]{http://docs.angularjs.org/api/ng.directive:ngKeyup} directives.
+use AngularJS built-in [ngKeydown/ngKeyup](http://docs.angularjs.org/api/ng.directive:ngKeyup) directives.
 
 ## Usage
 
 First, include JS code by adding `script` tag to your page:
+
 	<script src='//pgmmpk.github.io/mk-shortcuts/dist/mk-shortcuts-min.js'> </script>
 
 Then, declare `mkShortcuts' as your app dependency:
+
 	angular.module('myApp', ['mkShortcuts']);
 
 Now you are ready to use it!
@@ -79,17 +81,17 @@ Now you have `kbd` object in directive's scope. This and any nested scopes can u
 
 Function `mkShortcutsFactory` takes two optional parameters:
 
-1. elt - the DOM element where listeners are attached. If undefined or null, window's document will be used as event source. 
-         This effectively makes it page-wide.
+1. elt - the DOM element where listeners are attached. If undefined or null, window's `document` will be used as event source. 
+         This effectively makes it listen on the page-wide events.
 
 2. opts - options that control Shortcuts behavior. Valid options are:
 
-	* type          - can be 'keyup' or 'keydown'. This controls when events are emitted. Default is 'keydown'.
+	* `type`          - can be 'keyup' or 'keydown'. This controls when events are emitted. Default is 'keydown'.
 
-	* propagate     - true/false. Default is false (prevents recognized event from bubbling up).
+	* `propagate`     - true/false. Default is false (prevents recognized event from bubbling up).
 
-	* inputDisabled - true/false. Set it to true to suppress shortcut firing when focus is in INPUT or TEXTAREA. Default
-	                  is false (that fires events regardless).
+	* `inputDisabled` - true/false. Set it to true to suppress shortcut firing when focus is in INPUT or TEXTAREA. Default
+	                    is false (that fires events regardless).
 
 Calling factory function creates an instance of Shortcuts Manager.
 
@@ -97,28 +99,28 @@ Calling factory function creates an instance of Shortcuts Manager.
 
 Shortcuts Manager has the following members:
 
-1. shortcuts() - call this function to create a new Shortcuts bag.
+1. `shortcuts()` - call this function to create a new Shortcuts bag.
 
-2. currentMods - an object that contains the current state of keyboard modifiers. Members are:
+2. `currentMods` - an object that contains the current state of keyboard modifiers. Members are:
 
-	* ctrl  - true if Ctrl key is currently pressed.
-	* alt   - true if Alt key is currently pressed.
-	* shift - true if Shift key is currently pressed.
-	* meta  - true if Meta key is currently pressed.
+	* `ctrl`  - true if Ctrl key is currently pressed.
+	* `alt`   - true if Alt key is currently pressed.
+	* `shift` - true if Shift key is currently pressed.
+	* `meta`  - true if Meta key is currently pressed.
 
-3. close() - call this to close Shortcuts Manager. This detaches listeners that were attached at the time of creation (to keep
-             track of the current modifier states).
+3. `close()` - call this to close Shortcuts Manager. This detaches listeners that were attached at the time of creation (to keep
+               track of the current modifier states).
              
 ### Shortcuts API
 
 Shortcuts object has the following methods:
 
-1. on(keyName, handler, [opts]) - registers handler for the shortcut with name keyName. Options can be adjusted if needed
-                                 (see documentation for the opts parameter of mkKbManagerFactory'.
+1. `on(keyName, handler, [opts])` - registers handler for the shortcut with name keyName. Options can be adjusted if needed
+                                    (see documentation for the opts parameter of mkShortcutsFactory'.
 
-2. offAll() - unregisters all shortcuts registered with this object. Note that it is not possible to selectively unregister
-              shortcuts. If you need to manage life span of different shortcuts differently, just create a separate Shortcuts
-              object for each such set.
+2. `offAll()` - unregisters all shortcuts registered with this object. Note that it is not possible to selectively unregister
+                shortcuts. If you need to manage life span of different shortcuts differently, just create a separate Shortcuts
+                object for each such set.
 	
 ## Key Name Syntax
 
@@ -127,12 +129,14 @@ symbol `+`. Key label must be the last (or only) part of the name. Order of modi
 Case of the key name does not matter.
 
 Example of valid shortcut names:
+	
 	Ctrl+U
 	Alt+Ctrl+Z
 	X
 	PageDown
 
 Example of invalid shortcut names:
+	
 	Del    (use Delete)
 	U+Ctrl (key must be the last shortcut part)
 	XX     (no such key)
