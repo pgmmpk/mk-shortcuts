@@ -10,7 +10,7 @@ First, include JS code by adding `script` tag to your page:
 
 	<script src='//pgmmpk.github.io/mk-shortcuts/dist/mk-shortcuts.min.js'> </script>
 
-Then, declare `mkShortcuts' as your app dependency:
+Then, declare `mkShortcuts` as your app dependency:
 
 	angular.module('myApp', ['mkShortcuts']);
 
