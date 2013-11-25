@@ -8,7 +8,7 @@ use AngularJS built-in [ngKeydown/ngKeyup](http://docs.angularjs.org/api/ng.dire
 
 First, include JS code by adding `script` tag to your page:
 
-	<script src='//pgmmpk.github.io/mk-shortcuts/dist/mk-shortcuts-min.js'> </script>
+	<script src='//pgmmpk.github.io/mk-shortcuts/dist/mk-shortcuts.min.js'> </script>
 
 Then, declare `mkShortcuts' as your app dependency:
 

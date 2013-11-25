@@ -85,7 +85,7 @@
 		if (!code) {
 			throw new Error(
 					'Unrecognized key: "' + label +
-							'". For the list of valid key names, visit http://pgmmpk.github.io/'); // FIXME: url
+							'". For the list of valid key names, visit https://github.com/pgmmpk/mk-shortcuts/blob/master/README.md#key-name-syntax');
 		}
 
 		return code;
