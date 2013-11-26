@@ -39,7 +39,9 @@ Now you can use it in your controller to register shortcuts:
 				$scope.zoom /= 1.2;
 			});
 			
-		$scope.$on('$destroy', shortcuts.offAll); // cleanup when scope is destroyed
+		$scope.$on('$destroy', function() {
+			shortcuts.offAll(); // cleanup when scope is destroyed
+		});
 	});
 
 ## Scoped Shortcuts Manager
@@ -59,7 +61,9 @@ Example:
 				
 				scope.kbd = mkShortcutsFactory(elm); // attach only to this element
 				
-				scope.$on('$destroy', scope.kbd.close); // cleanup when we navigate away 
+				scope.$on('$destroy', function() {
+					scope.kbd.close(); // cleanup when we navigate away
+				}); 
 			}
 		};
 	});
@@ -72,7 +76,9 @@ Now you have `kbd` object in directive's scope. This and any nested scopes can u
 			.on('Ctrl+C', copyCurrentSelection)
 			.on('Ctrl+P', pasteCurrentSelection);
 			
-		$scope.$on('$destroy', shortcuts.offAll); // cleanup when scope is destroyed
+		$scope.$on('$destroy', function() {
+			shortcuts.offAll(); // cleanup when scope is destroyed
+		});
 	});
 	
 ## API
