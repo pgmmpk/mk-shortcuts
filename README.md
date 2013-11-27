@@ -2,7 +2,7 @@
 
 AngularJS module that provides mkShortcutFactory service. Use it for getting programmatic control over
 keyboard shortcuts. This is useful for dynamic shortcuts. If your shortcuts never change, you should instead
-use AngularJS built-in [ngKeydown/ngKeyup](http://docs.angularjs.org/api/ng.directive:ngKeyup) directives.
+use AngularJS UI [uiKeypress/uiKeydown/uiKeyup](https://github.com/angular-ui/ui-utils/blob/master/modules/keypress/keypress.js) directives.
 
 ## Usage
 
