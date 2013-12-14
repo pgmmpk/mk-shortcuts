@@ -304,6 +304,7 @@
 		'delete'      :  46,
 		'end'         :  35,
 
+		'space'       :  32,
 		'pageup'      :  33,
 		'pagedown'    :  34,
 

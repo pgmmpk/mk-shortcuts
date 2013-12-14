@@ -156,41 +156,42 @@ Following modifiers are recognized:
 
 Here is the list of recognized Keys:
 
-* A-Z
-* 0-1
-* F1-F12
-* Esc
-* Return, Enter
-* Tab
-* Backspace
-* Insert
-* Home
-* Delete
-* PageUp
-* PageDown
-* Up
-* Down
-* Left
-* Right
-* ScrollLock
-* NumLock
-* CapsLock
-* Pause, Break
-* Backtick
-* Minus
-* Plus
-* [
-* ]
-* ;
-* '
-* ,
-* .
-* /
-* Pad0-Pad9 (these are numeric keys on the numeric pad)
-* PadMinus
-* PadPlus
-* Pad/
-* Pad*
+* `A`-`Z`
+* `0`-`1`
+* `F1`-`F12`
+* `Esc`
+* `Return`, `Enter`
+* `Tab`
+* `Backspace`
+* `Insert`
+* `Home`
+* `Delete`
+* `Space`
+* `PageUp`
+* `PageDown`
+* `Up`
+* `Down`
+* `Left`
+* `Right`
+* `ScrollLock`
+* `NumLock`
+* `CapsLock`
+* `Pause`, `Break`
+* `Backtick`
+* `Minus`
+* `Plus`
+* `[`
+* `]`
+* `;`
+* `'`
+* `,`
+* `.`
+* `/`
+* `Pad0`-`Pad9` (these are numeric keys on the numeric pad)
+* `PadMinus`
+* `PadPlus`
+* `Pad/`
+* `Pad*`
  
 ## License
 MIT
