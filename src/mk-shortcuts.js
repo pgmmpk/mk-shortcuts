@@ -161,77 +161,81 @@
 				currentMods.meta  = evt.metaKey;
 			}
 
-			var Shortcuts = function() {
-				this.currentMods = currentMods;
-			};
+			function shortcuts() {
+				
+				var sc = {};
+				
+				var _offAll = null;
 
-			Shortcuts.prototype.on = function(key, callback, opts) {
+				sc.on = function(key, callback, opts) {
 
-				opts = angular.extend({}, config, opts);
+					opts = angular.extend({}, config, opts);
 
-				var parts = key.split('+');
-				var expectedMods = parseMods(parts.slice(0, parts.length - 1));
-				var expectedCode = parseKey(parts[parts.length - 1]);
+					var parts = key.split('+');
+					var expectedMods = parseMods(parts.slice(0, parts.length - 1));
+					var expectedCode = parseKey(parts[parts.length - 1]);
 
-				var handler = function(evt) {
-					evt = evt || $window.event;
+					var handler = function(evt) {
+						evt = evt || $window.event;
 
-					//console.log('evt:', evt);
-					//console.log('expectedCode:', expectedCode);
+						//console.log('evt:', evt);
+						//console.log('expectedCode:', expectedCode);
 
-					// Disable event handler when focus is in input or textarea
-					if (opts.inputDisabled) {
-						var elt = evt.target || evt.srcElement;
-						if (elt.nodeType === 3)
-							elt = elt.parentNode;
-						if (elt.tagName === 'INPUT' || elt.tagName === 'TEXTAREA') return;
-					}
-
-					var keyCode = evt.keyCode || evt.which;
-					//console.log('keyCode:', keyCode, expectedMods);
-					if (keyCode            !== expectedCode || 
-						expectedMods.ctrl  !== evt.ctrlKey  || 
-						expectedMods.shift !== evt.shiftKey || 
-						expectedMods.alt   !== evt.altKey   || 
-						expectedMods.meta  !== evt.metaKey) return;
-
-					$timeout(function() {
-						callback(evt);
-					});
-
-					if (!opts.propagate) { // Stop the event
-						// evt.cancelBubble is supported by IE - this will kill the bubbling process.
-						evt.cancelBubble = true;
-						evt.returnValue = false;
-
-						// evt.stopPropagation works in Firefox.
-						if (evt.stopPropagation) {
-							evt.stopPropagation();
-							evt.preventDefault();
+						// Disable event handler when focus is in input or textarea
+						if (opts.inputDisabled) {
+							var elt = evt.target || evt.srcElement;
+							if (elt.nodeType === 3)
+								elt = elt.parentNode;
+							if (elt.tagName === 'INPUT' || elt.tagName === 'TEXTAREA') return;
 						}
 
-						return false;
+						var keyCode = evt.keyCode || evt.which;
+						//console.log('keyCode:', keyCode, expectedMods);
+						if (keyCode            !== expectedCode || 
+							expectedMods.ctrl  !== evt.ctrlKey  || 
+							expectedMods.shift !== evt.shiftKey || 
+							expectedMods.alt   !== evt.altKey   || 
+							expectedMods.meta  !== evt.metaKey) return;
+
+						$timeout(function() {
+							callback(evt);
+						});
+
+						if (!opts.propagate) { // Stop the event
+
+							// evt.stopPropagation works in Firefox.
+							if (evt.stopPropagation) {
+								evt.stopPropagation();
+								evt.preventDefault();
+							}
+
+							return false;
+						}
+					};
+
+					attachEvent(target, opts.type, handler);
+
+					var chain = _offAll;
+					_offAll = function() {
+						detachEvent(target, opts.type, handler);
+
+						if (chain) chain();
+					};
+
+					return this;
+				};
+
+				sc.close = sc.offAll = function() {
+					if (_offAll) {
+						_offAll();
+						_offAll = null;
 					}
 				};
-
-				attachEvent(target, opts.type, handler);
-
-				var chain = this._offAll;
-				this._offAll = function() {
-					detachEvent(target, opts.type, handler);
-
-					if (chain) chain();
-				};
-
-				return this;
-			};
-
-			Shortcuts.prototype.offAll = function() {
-				if (this._offAll) {
-					this._offAll();
-					delete this._offAll;
-				}
-			};
+				
+				sc.currentMods = currentMods;
+				
+				return sc;
+			}
 
 			attachEvent(target, 'keyup', updateCurrentMods);
 			attachEvent(target, 'keydown', updateCurrentMods);
@@ -246,7 +250,7 @@
 				currentMods : currentMods,
 
 				shortcuts : function() {
-					return new Shortcuts();
+					return shortcuts();
 				}
 			};
 		};

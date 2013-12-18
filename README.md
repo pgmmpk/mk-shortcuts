@@ -39,9 +39,7 @@ Now you can use it in your controller to register shortcuts:
 				$scope.zoom /= 1.2;
 			});
 			
-		$scope.$on('$destroy', function() {
-			shortcuts.offAll(); // cleanup when scope is destroyed
-		});
+		$scope.$on('$destroy', shortcuts.close); // cleanup when scope is destroyed
 	});
 
 ## Scoped Shortcuts Manager
@@ -76,9 +74,7 @@ Now you have `kbd` object in directive's scope. This and any nested scopes can u
 			.on('Ctrl+C', copyCurrentSelection)
 			.on('Ctrl+P', pasteCurrentSelection);
 			
-		$scope.$on('$destroy', function() {
-			shortcuts.offAll(); // cleanup when scope is destroyed
-		});
+		$scope.$on('$destroy', shortcuts.close); // cleanup when scope is destroyed
 	});
 	
 ## API
@@ -124,7 +120,7 @@ Shortcuts object has the following methods:
 1. `on(keyName, handler, [opts])` - registers handler for the shortcut with name keyName. Options can be adjusted if needed
                                     (see documentation for the opts parameter of mkShortcutsFactory'.
 
-2. `offAll()` - unregisters all shortcuts registered with this object. Note that it is not possible to selectively unregister
+2. `close()` - unregisters all shortcuts registered with this object. Note that it is not possible to selectively unregister
                 shortcuts. If you need to manage life span of different shortcuts differently, just create a separate Shortcuts
                 object for each such set.
 	

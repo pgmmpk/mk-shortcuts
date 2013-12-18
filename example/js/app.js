@@ -15,13 +15,17 @@
 				.on('Ctrl+Z', function() {
 					scope.logs.push('Undo');
 				})
+				.on('Shift+Delete', function() {
+					scope.logs.push('Shift+Delete');
+				})
+				.on('Alt+Up', function() {
+					scope.logs.push('Alt+Up');
+				})
 				.on('Ctrl+Alt+Shift+Delete', function() {
 					scope.logs.push('Boom!!!');
 				});
-			
-			scope.$on('$destroy', function() {
-				shortcuts.offAll();
-			});
+
+			scope.$on('$destroy', shortcuts.close);
 		};
 		
 	}]);
