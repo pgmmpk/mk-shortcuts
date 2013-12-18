@@ -191,8 +191,8 @@
 					//console.log('keyCode:', keyCode, expectedMods);
 					if (keyCode            !== expectedCode || 
 						expectedMods.ctrl  !== evt.ctrlKey  || 
-						expectedMods.alt   !== evt.shiftKey || 
-						expectedMods.shift !== evt.altKey   || 
+						expectedMods.shift !== evt.shiftKey || 
+						expectedMods.alt   !== evt.altKey   || 
 						expectedMods.meta  !== evt.metaKey) return;
 
 					$timeout(function() {
